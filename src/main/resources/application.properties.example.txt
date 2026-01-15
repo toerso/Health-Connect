@@ -1,0 +1,20 @@
+spring.application.name=health-connect
+
+# Database Connection with SSL
+spring.datasource.url=
+spring.datasource.username=avnadmin
+spring.datasource.password=
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# Connection Pool Settings (add these for better connection handling)
+spring.datasource.hikari.connectionTimeout=30000
+spring.datasource.hikari.maximumPoolSize=5
+spring.datasource.hikari.idleTimeout=600000
+
+# JPA Settings
+spring.jpa.hibernate.ddl-auto=create
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+jwt.secretKey=
