@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService {
     private final AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
 
     public LoginResponse login(LoginRequest request) {
         Authentication authentication = authenticationManager.authenticate(
@@ -23,8 +24,7 @@ public class AuthService {
         );
 
         User user = (User) authentication.getPrincipal();
-        assert user != null;
-        String token = JwtUtil.generateToken(user);
+        String token = jwtUtil.generateToken(user);
 
         return new LoginResponse(token, user.getId());
     }

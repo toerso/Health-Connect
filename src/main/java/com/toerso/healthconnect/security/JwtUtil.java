@@ -4,30 +4,32 @@ import com.toerso.healthconnect.entity.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
+@Component
 public class JwtUtil {
-    @Value("${jwt.secretKey}")
-    private static String secretKey;
+    @Value("${app.jwt.secret}")
+    private String secretKey;
 
-    private static SecretKey getSecretKey() {
+    private SecretKey getSecretKey() {
         return Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
     }
 
-    public static String generateToken(User user) {
+    public String generateToken(User user) {
         return Jwts.builder()
                 .subject(user.getUsername())
                 .claim("userId", user.getId().toString())
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() * 1000 * 60 * 15))
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 15))
                 .signWith(getSecretKey())
                 .compact();
     }
 
-    public static String extractUserName(String token) {
+    public String extractUserName(String token) {
         return Jwts.parser()
                 .verifyWith(getSecretKey())
                 .build()
@@ -36,7 +38,7 @@ public class JwtUtil {
                 .getSubject();
     }
 
-    public static boolean validateToken(String token) {
+    public boolean validateToken(String token) {
         try {
             Jwts.parser()
                     .verifyWith(getSecretKey())
