@@ -19,7 +19,16 @@ public class Doctor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
+    private Integer age;
+
+    @Column(nullable = false)
+    private String phone;
+
+    @Column(nullable = false)
     private String specialization;
 
     @OneToMany(mappedBy = "doctor")

@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -20,11 +19,13 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
-    @Column(name = "date_of_birth")
-    private LocalDate dateOfBirth;
+    @Column(nullable = false)
+    private Integer age;
 
+    @Column(nullable = false)
     private String phone;
 
     @Column(name = "medical_history", columnDefinition = "TEXT")

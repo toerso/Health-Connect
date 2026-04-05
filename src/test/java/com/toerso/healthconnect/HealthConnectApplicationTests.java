@@ -9,7 +9,7 @@ class HealthConnectApplicationTests {
 
 	@Test
 	void contextLoads() {
-		System.out.println(new BCryptPasswordEncoder().encode("12345"));
+		//System.out.println(new BCryptPasswordEncoder().encode("12345"));
 	}
 
 }

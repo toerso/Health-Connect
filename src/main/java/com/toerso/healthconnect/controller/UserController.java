@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("${app.api-prefix}/user")
+@RequestMapping("/user")
 public class UserController {
 
     @GetMapping("/profile")
