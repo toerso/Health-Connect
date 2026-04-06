@@ -33,8 +33,11 @@ public class SecurityConfig {
                         )
                 .formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/admin/**").hasRole(ADMIN.name())
+                        .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/auth/register").permitAll() // Logic inside checks for token
+                        .requestMatchers("/admin/invite").hasRole(ADMIN.name())
+                        // Receptionist can only invite Patients
+                        .requestMatchers("/reception/invite-patient").hasRole(RECEPTIONIST.name())
                         .requestMatchers("/doctor/**").hasAnyRole(DOCTOR.name(), ADMIN.name())
                         .anyRequest().authenticated()
                 )

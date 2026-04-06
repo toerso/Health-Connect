@@ -28,4 +28,6 @@ public class RegistrationRequest {
             message = "Password must contain uppercase, lowercase, number, and special character"
     )
     private String password;
+
+    private String specialization;
 }

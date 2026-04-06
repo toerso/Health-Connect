@@ -30,6 +30,15 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Doctor doctor;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Patient patient;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Receptionist receptionist;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     Set<RoleType> roles = new HashSet<>();
