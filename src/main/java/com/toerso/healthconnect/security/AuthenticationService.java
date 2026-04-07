@@ -12,7 +12,6 @@ import com.toerso.healthconnect.exception.UserAlreadyExist;
 import com.toerso.healthconnect.repository.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -89,9 +87,10 @@ public class AuthenticationService {
     private void createDoctorProfile(User user, RegistrationRequest request) {
         Doctor doctor = Doctor.builder()
                 .user(user)
-                .name(request.getName())
+                .name(request.getFullName())
                 .age(request.getAge())
                 .phone(request.getPhone())
+                .email(request.getEmail())
                 .specialization(request.getSpecialization())
                 .build();
 
@@ -101,7 +100,7 @@ public class AuthenticationService {
     private void createPatientProfile(User user, RegistrationRequest request) {
         Patient patient = Patient.builder()
                 .user(user)
-                .name(request.getName())
+                .name(request.getFullName())
                 .age(request.getAge())
                 .phone(request.getPhone())
                 .build();
@@ -112,9 +111,10 @@ public class AuthenticationService {
     private void createReceptionistProfile(User user, RegistrationRequest request) {
         Receptionist receptionist = Receptionist.builder()
                 .user(user)
-                .name(request.getName())
+                .name(request.getFullName())
                 .age(request.getAge())
                 .phone(request.getPhone())
+                .email(request.getEmail())
                 .build();
 
         receptionistRepository.save(receptionist);

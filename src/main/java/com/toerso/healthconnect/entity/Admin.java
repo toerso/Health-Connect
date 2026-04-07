@@ -1,18 +1,13 @@
 package com.toerso.healthconnect.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Getter
-@Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "doctors")
-public class Doctor {
+public class Admin {
     @Id
     private Long id;
 
@@ -28,14 +23,8 @@ public class Doctor {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
-    private String specialization;
-
     @OneToOne
     @MapsId
     @JoinColumn(name = "user_id")
     private User user;
-
-    @OneToMany(mappedBy = "doctor")
-    private List<Appointment> appointments;
 }

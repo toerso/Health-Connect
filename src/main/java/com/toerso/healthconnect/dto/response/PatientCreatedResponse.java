@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class InvitationResponse {
-    private String registrationLink;
+public class PatientCreatedResponse {
+    private Long patientId;
+    private String temporaryPassword;
 }

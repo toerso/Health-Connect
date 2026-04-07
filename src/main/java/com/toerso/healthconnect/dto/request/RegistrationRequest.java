@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class RegistrationRequest {
     @NotBlank(message = "Full name is required")
-    private String name;
+    private String fullName;
 
     @NotBlank(message = "Username is required")
     private String username;
@@ -20,6 +20,13 @@ public class RegistrationRequest {
             message = "Please enter a  valid mobile number"
     )
     private String phone;
+
+    @NotBlank(message = "Email is required")
+    @Pattern(
+            regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+            message = "Please provide a valid email address"
+    )
+    private String email;
 
     @NotBlank
     @Size(min = 8, max = 20, message = "Password must be between 8 and 20 characters")

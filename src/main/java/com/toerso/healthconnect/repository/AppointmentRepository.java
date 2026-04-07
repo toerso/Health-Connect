@@ -5,7 +5,10 @@ import com.toerso.healthconnect.entity.Doctor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
-    public boolean existsByDoctorAndAppointmentTime(Doctor doctor, LocalDateTime appointmentTime);
+    public boolean existsByDoctorIdAndAppointmentTime(Long doctorId, LocalDateTime appointmentTime);
+
+    public List<Appointment> findByPatientId(Long patientId);
 }

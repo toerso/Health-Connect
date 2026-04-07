@@ -31,6 +31,9 @@ public class User implements UserDetails {
     private String password;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Admin admin;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Doctor doctor;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
@@ -42,6 +45,9 @@ public class User implements UserDetails {
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     Set<RoleType> roles = new HashSet<>();
+
+    @Column(nullable = false)
+    private boolean requiresPasswordChange = true;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

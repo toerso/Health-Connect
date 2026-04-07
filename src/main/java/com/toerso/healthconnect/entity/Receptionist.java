@@ -22,6 +22,9 @@ public class Receptionist {
     @Column(nullable = false)
     private String phone;
 
+    @Column(nullable = false)
+    private String email;
+
     @OneToOne
     @MapsId
     @JoinColumn(name = "user_id")
