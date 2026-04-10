@@ -84,13 +84,14 @@ public class ReceptionistServiceImpl implements ReceptionistService {
     @Override
     @Transactional
     public AppointmentCreatedResponse scheduleAppointment(AppointmentCreateRequest request) {
+        Doctor doctor = doctorRepository.findById(request.getDoctorId()).orElseThrow(() ->
+                new RuntimeException("Doctor not found")
+        );
+
         //checking double booking
-        if (appointmentRepository.existsByDoctorIdAndAppointmentTime(request.getDoctorId(), request.getAppointmentTime()))
+        if (appointmentRepository.existsByDoctorAndAppointmentTime(doctor, request.getAppointmentTime()))
             throw new AppointmentConflictException(request.getDoctorId(), request.getAppointmentTime());
 
-        Doctor doctor = doctorRepository.findById(request.getDoctorId()).orElseThrow(() ->
-                        new RuntimeException("Doctor not found")
-                );
         Patient patient = patientRepository.findById(request.getPatientId()).orElseThrow(() ->
                         new RuntimeException("Patient not found")
                 );

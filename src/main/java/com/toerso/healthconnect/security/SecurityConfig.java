@@ -37,8 +37,7 @@ public class SecurityConfig {
                         .requestMatchers("/auth/register").permitAll() // Logic inside checks for token
                         .requestMatchers("/admin/invite").hasRole(ADMIN.name())
                         // Receptionist can only invite Patients
-                        .requestMatchers("/reception/admit-patient").hasRole(RECEPTIONIST.name())
-                        .requestMatchers("/reception/book-appointment").hasRole(RECEPTIONIST.name())
+                        .requestMatchers("/reception/**").hasAnyRole(RECEPTIONIST.name(), ADMIN.name())
                         .requestMatchers("/doctor/**").hasAnyRole(DOCTOR.name(), ADMIN.name())
                         .anyRequest().authenticated()
                 )

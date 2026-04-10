@@ -36,6 +36,9 @@ public class Doctor {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
+    private List<MedicalRecord> authoredMedicalRecords;
+
     @OneToMany(mappedBy = "doctor")
     private List<Appointment> appointments;
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "admins")
 public class Admin {
     @Id
     private Long id;

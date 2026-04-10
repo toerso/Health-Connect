@@ -25,13 +25,13 @@ public class Patient {
     @Column(nullable = false)
     private String phone;
 
-    @Column(name = "medical_history", columnDefinition = "TEXT")
-    private String medicalHistory;
-
     @OneToOne
     @MapsId
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<MedicalRecord> medicalRecords;
 
     @OneToMany(mappedBy = "patient")
     private List<Appointment> appointments;
