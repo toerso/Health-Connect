@@ -1,5 +1,6 @@
 package com.toerso.healthconnect.service;
 
+import com.toerso.healthconnect.dto.request.EncounterRequest;
 import com.toerso.healthconnect.dto.response.AppointmentResponse;
 import com.toerso.healthconnect.dto.response.MedicalRecordResponse;
 import com.toerso.healthconnect.dto.response.PatientSearchedResponse;
@@ -12,4 +13,5 @@ public interface DoctorService {
     Page<PatientSearchedResponse> searchPatients(User doctor, String name, String phone, Pageable pageable);
 
     Page<MedicalRecordResponse> getPatientMedicalHistory(User doctor, Long patientId, Pageable pageable);
+    void createEncounter(User user, Long patientId, EncounterRequest request);
 }

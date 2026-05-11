@@ -1,5 +1,7 @@
 package com.toerso.healthconnect.service;
 
+import com.toerso.healthconnect.dto.request.AuditLogRequest;
+
 public interface AuditLogService {
-    void log(String username, String action, String type, Long id);
+    void log(AuditLogRequest request);
 }

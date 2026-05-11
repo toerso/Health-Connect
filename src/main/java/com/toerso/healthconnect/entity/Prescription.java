@@ -2,14 +2,12 @@ package com.toerso.healthconnect.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "prescriptions")
@@ -18,10 +16,18 @@ public class Prescription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String medicine;
+
+    @Column(nullable = false)
     private String efficacy;
+
+    @Column(nullable = false)
     private String dosage;
+
+    @Column(nullable = false)
     private String duration;
+
     private String instructions;
 
     @ManyToOne(fetch = FetchType.LAZY)

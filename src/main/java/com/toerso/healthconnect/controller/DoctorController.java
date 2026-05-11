@@ -1,8 +1,8 @@
 package com.toerso.healthconnect.controller;
 
+import com.toerso.healthconnect.dto.request.EncounterRequest;
 import com.toerso.healthconnect.dto.response.AppointmentResponse;
 import com.toerso.healthconnect.dto.response.MedicalRecordResponse;
-import com.toerso.healthconnect.dto.response.PatientResponse;
 import com.toerso.healthconnect.dto.response.PatientSearchedResponse;
 import com.toerso.healthconnect.entity.User;
 import com.toerso.healthconnect.service.AuditLogService;
@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -56,8 +57,16 @@ public class DoctorController {
             @PathVariable Long id,
             Pageable pageable
     ) {
-        auditLogService.log(user.getUsername(), "VIEWING SENSITIVE DATA", "Patient", id);
-
         return ResponseEntity.ok(doctorService.getPatientMedicalHistory(user, id, pageable));
+    }
+
+    @PostMapping("/patient/{id}/encounter")
+    public ResponseEntity<String> createEncounter(
+            @AuthenticationPrincipal User user,
+            @RequestBody EncounterRequest request,
+            @RequestParam Long id
+    ) {
+        doctorService.createEncounter(user, id, request);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Medical record is created successfully for patient: " + id);
     }
 }
